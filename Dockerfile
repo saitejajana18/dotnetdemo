@@ -17,6 +17,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 
 COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS http://*:5000
-
 EXPOSE 5000
 ENTRYPOINT ["dotnet", "dotnet6.dll"]
