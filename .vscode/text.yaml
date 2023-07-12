@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: dotnetdemo-deployment
+  namespace: space
   labels:
     app: dotnetdemo
 spec:
@@ -15,7 +16,7 @@ spec:
         app: dotnetdemo
     spec:
       containers:
-      - name: nginx
-        image: nginx:1.14.2
+      - name: dotnetdemo
+        image: saitejajana/dotnetdemo:2.0
         ports:
-        - containerPort: 1818
+        - containerPort: 5000

@@ -1,12 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: dotnetdemo
+  namespace: space  
 spec:
   selector:
     app: dotnetdemo
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 1818
+      port: 5000
+      targetPort: 5000
   type: LoadBalancer
