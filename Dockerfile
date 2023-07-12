@@ -16,6 +16,6 @@ RUN dotnet publish "dotnet6.csproj" -c Release -o publish
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 
 COPY --from=build /app/publish .
-ENV ASPNETCORE_URLS http://*:4000
+ENV ASPNETCORE_URLS http://*:5000
 
-EXPOSE 4000
+EXPOSE 1818
