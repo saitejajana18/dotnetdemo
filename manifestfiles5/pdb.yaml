@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: dotnet
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      p1key017: p1value017
+      p2key017: p2value017

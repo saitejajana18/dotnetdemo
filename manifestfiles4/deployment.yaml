@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  surya007
-  namespace: my1000namespace
+  name: dotnet
+  namespace: ns017
   labels:
-    app:  surya007
+    app: dotnet
 spec:
   selector:
     matchLabels:
-      app: surya007
+      app: dotnet
   replicas: 1
   strategy:
     rollingUpdate:
@@ -18,15 +18,17 @@ spec:
   template:
     metadata:
       labels:
-        app:  surya007
+        app: dotnet
     spec:
-      # initContainers:
-        # Init containers are exactly like regular containers, except:
-          # - Init containers always run to completion.
-          # - Each init container must complete successfully before the next one starts.
+      tolerations:                          # Add this section for tolerations
+      - key: "key017"                 # Replace "example-key" with the actual taint key
+        operator: "Equal"                  # Operator can be "Equal", "Exists", "DoesNotExist"
+        value: "value017"             # Replace "example-value" with the actual taint value
+        effect: "NoSchedule"               # Effect can be "NoSchedule", "PreferNoSchedule", "NoExecute"
+
       containers:
-      - name:  surya007
-        image:  my100acr.azurecr.io/surya007:
+      - name: dotnet
+        image: acr017.azurecr.io/dotnet:1.0
         resources:
           requests:
             cpu: 100m
@@ -55,11 +57,10 @@ spec:
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
-              name: surya007
+              name: dotnet
               key: DB_HOST
         ports:
-        - containerPort:  80
-          name:  dotnet
+        - containerPort: 80
+          name: dotnet
       imagePullSecrets:
-        - name: acrr-secret
-        
+        - name: acrrr-secret

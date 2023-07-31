@@ -1,0 +1,25 @@
+Network:
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: surya007
+  namespace: my1000namespace
+spec:
+  podSelector:
+    matchLabels:
+      app: surya007
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    # Allow incoming traffic from pods in the same namespace with the label "app: dotnetdemo"
+    - from:
+      - podSelector:
+          matchLabels:
+            app: surya007
+  egress:
+    # Allow outgoing traffic to pods in the same namespace with the label "app: dotnetdemo"
+    - to:
+      - podSelector:
+          matchLabels:
+            app: surya007

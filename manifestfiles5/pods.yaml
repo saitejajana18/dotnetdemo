@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dotnet
+  labels:
+    app: my-app          # Apply the label 'app: my-app' to the pod
+    p1key017: p1value017 # Apply the label 'p1key017: p1value017' to the pod
+    p2key017: p2value017 # Apply the label 'p2key017: p2value017' to the pod
+spec:
+  containers:
+    - name: dotnet
+      image: acr017.azurecr.io/dotnet:1.0
+      resources:
+        limits:
+          cpu: "500m"      # Maximum of 500 milli CPUs (0.5 CPUs)
+          memory: "512Mi"  # Maximum of 512 Mebibytes of memory
+        requests:
+          cpu: "100m"      # Request 100 milli CPUs (0.1 CPUs) at minimum
+          memory: "256Mi"  # Request 256 Mebibytes of memory at minimum
+      # Additional container specifications...

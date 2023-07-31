@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnet
+  namespace: ns017
+  labels:
+    app: dotnet
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dotnet
+  template:
+    metadata:
+      labels:
+        app: dotnet
+    spec:
+      affinity:
+        # podAffinity:  # Add pod affinity rules
+        #   requiredDuringSchedulingIgnoredDuringExecution:
+        #     - labelSelector:
+        #         matchExpressions:
+        #           - key: p1key017
+        #             operator: In
+        #             values:
+        #               - p1value017
+        #       topologyKey: "kubernetes.io/hostname"
+        #     - labelSelector:
+        #         matchExpressions:
+        #           - key: p2key017
+        #             operator: In
+        #             values:
+        #               - p2value017
+        #       topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:  # Add node affinity rules
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: akey0017
+                    operator: In
+                    values:
+                    - avalue0017
+      tolerations:  # Add tolerations for the specified taint
+      - key: "key017"
+        operator: "Equal"
+        value: "value017"
+        effect: "NoSchedule"
+      containers:
+      - name: dotnet
+        image: acr017.azurecr.io/dotnet:1.0
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        livenessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /_status/healthz
+            port: 5000
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: dotnet
+              key: DB_HOST
+        ports:
+        - containerPort: 80
+          name: dotnet
+      imagePullSecrets:
+        - name: acrrr-secret

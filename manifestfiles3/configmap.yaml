@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: dotnet
-  namespace: dotnet
+  name: surya007
+  namespace: my1000namespace
 data:
   DB_HOST: default

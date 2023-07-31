@@ -26,7 +26,7 @@ spec:
           # - Each init container must complete successfully before the next one starts.
       containers:
       - name:  surya007
-        image:  my100acr.azurecr.io/surya007:
+        image:  my100acr.azurecr.io/surya007:1.0.3
         resources:
           requests:
             cpu: 100m

@@ -1,18 +1,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: dotnet
-  namespace: dotnet
+  name: surya007
+  namespace: my1000namespace
 spec:
   selector:
-    app: dotnet
+    app: surya007
   type: LoadBalancer
   sessionAffinity: None
   sessionAffinityConfig:
     clientIP:
       timeoutSeconds: 10800
   ports:
-  - name: dotnet
+  - name: surya007
     protocol: TCP
     port: 80
     targetPort: 5000

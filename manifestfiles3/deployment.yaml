@@ -20,13 +20,30 @@ spec:
       labels:
         app:  surya007
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: key
+                operator: In
+                values:
+                - value
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: key
+                operator: In
+                values:
+                - value   
       # initContainers:
         # Init containers are exactly like regular containers, except:
           # - Init containers always run to completion.
           # - Each init container must complete successfully before the next one starts.
       containers:
       - name:  surya007
-        image:  my100acr.azurecr.io/surya007:
+        image:  my100acr.azurecr.io/surya007:1.0.3
         resources:
           requests:
             cpu: 100m
@@ -57,6 +74,7 @@ spec:
             configMapKeyRef:
               name: surya007
               key: DB_HOST
+   
         ports:
         - containerPort:  80
           name:  dotnet

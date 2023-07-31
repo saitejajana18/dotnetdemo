@@ -1,0 +1,12 @@
+role:
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: surya007
+  namespace: my1000namespace
+rules:
+  - apiGroups: [""]         # Apply to core Kubernetes API group (api/v1)
+    resources: ["*"]    
+    verbs: ["get", "list", "watch", "create", "delete"]
+
+  # Add more rules as needed for other resources and verbs

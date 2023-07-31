@@ -1,0 +1,14 @@
+rolebinding :
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: surya007
+  namespace: my1000namespace
+subjects:
+  - kind: ServiceAccount
+    name: surya007
+    namespace: my1000namespace
+roleRef:
+  kind: Role
+  name: surya007
+  apiGroup: rbac.authorization.k8s.io
